@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11130f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LiftLog">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="LiftLog">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c8ff5a'/%3E%3Cpath d='M24 43h52v14H24zM34 29h10v42H34zM56 29h10v42H56z' fill='%2311130f'/%3E%3C/svg%3E">
+<title>LiftLog — Workout Tracker</title>
+<style>
+:root{color-scheme:dark;--bg:#0e100d;--panel:#171a15;--panel2:#1d211b;--line:#343a31;--text:#f4f1e8;--muted:#9da197;--accent:#c8ff5a;--accent2:#ff7351;--cream:#f1eee5;--ink:#171813;--danger:#ff8068}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}button,input,textarea,select{font:inherit}button{cursor:pointer}body{padding-bottom:env(safe-area-inset-bottom)}
+.app{min-height:100vh;background:radial-gradient(circle at 85% 0%,#20251b 0,transparent 32%),var(--bg)}
+.top{max-width:1180px;margin:auto;padding:22px 20px 12px}.eyebrow{font-size:11px;letter-spacing:.18em;color:#a8aca2;font-weight:800;text-transform:uppercase}.titleRow{display:flex;justify-content:space-between;align-items:end;gap:16px}.title{font-size:clamp(32px,5vw,48px);line-height:1.02;font-weight:350;letter-spacing:-.04em;margin-top:5px}.navBtns{display:flex;gap:8px}.round{width:42px;height:42px;border:1px solid var(--line);background:#171a15;color:var(--text);border-radius:50%}.todayBtn{padding:11px 16px;border-radius:24px;border:1px solid var(--line);background:#171a15;color:var(--text);font-weight:700}.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:22px}.dayCard{min-height:96px;border:1px solid var(--line);border-radius:12px;background:#151813;padding:12px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;color:var(--text)}.dayCard.active{background:var(--cream);color:var(--ink);border-color:var(--cream)}.dow{font-size:10px;font-weight:800;letter-spacing:.14em;opacity:.72}.dateNum{font-size:21px;font-weight:800}.dot{height:7px;width:7px;border-radius:50%;background:#73786e;display:inline-block}.active .dot{background:var(--accent2)}.planned{font-size:10px;font-weight:800;opacity:.65;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.active .planned{color:#55584e}
+.shell{max-width:1180px;margin:18px auto 40px;padding:0 20px}.card{border:1px solid var(--line);border-radius:20px;background:rgba(23,26,21,.95);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.18)}.cardHead{padding:22px 26px 20px;border-bottom:1px solid var(--line)}.headTop{display:flex;justify-content:space-between;align-items:end;gap:16px}.dateTitle{font-size:29px;font-weight:350;letter-spacing:-.035em}.stat{text-align:right}.stat strong{font-size:30px}.stat span{color:var(--muted);font-size:12px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid var(--line);background:transparent;color:#b3b6ad;border-radius:999px;padding:9px 13px;font-weight:750;font-size:12px}.chip.selected{background:#42251e;border-color:#42251e;color:#ff7a55}.chip.rest.selected{background:#30352c;color:var(--accent);border-color:#30352c}.mainGrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.72fr);min-height:470px}.log{padding:24px 26px}.entry{background:#191c17;border:1px solid #3a4036;border-radius:16px;padding:18px;margin-bottom:14px}.entryTop{display:flex;justify-content:space-between;gap:12px}.exerciseTitle{font-size:18px;font-weight:800}.meta{font-size:12px;color:var(--muted);margin-top:4px}.setTable{margin-top:15px;border-top:1px solid var(--line)}.setRow{display:grid;grid-template-columns:38px 1fr 1fr 1.1fr 32px;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #292d27}.setRow.head{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#7f857b;font-weight:800}.setNo{font-size:11px;color:#858b80;font-weight:800}.setVal{font-size:14px}.remark{font-size:12px;color:#a8ada1;margin-top:11px;line-height:1.5}.deleteSet,.deleteEx{border:0;background:transparent;color:#737a70;font-size:16px}.empty{border:1px dashed #596055;border-radius:16px;padding:28px 18px;color:#9ca198}.empty strong{display:block;color:#e6e3da;margin-bottom:5px}.form{background:var(--cream);color:var(--ink);padding:24px}.form .eyebrow{color:#666a61}.form h2{font-size:25px;font-weight:400;margin:5px 0 20px;letter-spacing:-.03em}.field{margin:0 0 14px}.field label{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:850;color:#5f6259;margin-bottom:7px}.input,.textarea,.select{width:100%;border:1px solid #b7b5ad;background:#dedbd2;color:#171813;border-radius:11px;padding:13px;outline:none}.input:focus,.textarea:focus,.select:focus{border-color:#9cc83b;box-shadow:0 0 0 3px rgba(156,200,59,.18)}.textarea{min-height:84px;resize:vertical}.setsBox{background:#e1ded5;border:1px solid #c1beb5;border-radius:12px;padding:12px;margin-bottom:14px}.setsHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.setsHeader b{font-size:12px}.addSet{border:0;background:#d0cfca;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800}.newSet{display:grid;grid-template-columns:28px 1fr 1fr 30px;gap:7px;align-items:center;margin-top:7px}.newSet span{font-size:11px;font-weight:800;color:#777a72}.mini{width:100%;border:1px solid #b9b7af;background:#f0eee8;color:#171813;border-radius:8px;padding:10px 8px}.save{width:100%;border:0;border-radius:11px;padding:14px;background:var(--accent);color:#141710;font-weight:900;font-size:15px}.cancel{width:100%;border:1px solid #bbb9b0;background:transparent;color:#363930;border-radius:11px;padding:12px;font-weight:800;margin-top:8px}.footerBar{max-width:1180px;margin:0 auto 40px;padding:0 20px}.tools{display:flex;gap:10px;flex-wrap:wrap}.tool{border:1px solid var(--line);background:#151813;color:#d8d6cd;padding:11px 14px;border-radius:12px;font-weight:750;font-size:12px}.install{margin-top:14px;border:1px solid #3b4235;background:#171a15;border-radius:16px;padding:15px;color:#aeb2a8;font-size:12px;line-height:1.55}.install b{color:var(--text)}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:#f2efe6;color:#171813;border-radius:999px;padding:12px 17px;font-weight:800;font-size:12px;box-shadow:0 15px 40px rgba(0,0,0,.35);transition:.25s;z-index:20}.toast.show{transform:translate(-50%,0)}
+@media(max-width:800px){.top{padding:18px 14px 8px}.shell,.footerBar{padding:0 14px}.week{overflow-x:auto;grid-template-columns:repeat(7,minmax(102px,1fr));padding-bottom:3px}.dayCard{min-height:88px}.mainGrid{grid-template-columns:1fr}.form{border-top:1px solid #d0cdc3}.cardHead{padding:19px 17px}.log{padding:18px 17px}.title{font-size:34px}.navBtns{display:none}.setRow{grid-template-columns:28px 1fr 1fr 1.2fr 26px}.setRow.head{font-size:9px}.dateTitle{font-size:26px}.stat strong{font-size:25px}}
+@media(max-width:430px){.headTop{align-items:start}.chips{gap:6px}.chip{padding:8px 10px}.form{padding:20px 16px}.entry{padding:15px}.setRow{gap:5px}.setVal{font-size:12px}.week{gap:6px}.dayCard{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<style>
+.dashboard{max-width:1180px;margin:18px auto 0;padding:0 20px}.dashGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.dashCard{border:1px solid var(--line);background:#151813;border-radius:18px;padding:18px}.dashTitle{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#92988d;font-weight:850}.dashBig{font-size:30px;margin-top:5px}.metricGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.metric{background:#1b1f19;border:1px solid #2d332a;border-radius:12px;padding:12px}.metric b{display:block;font-size:20px}.metric span{font-size:10px;color:#8f958b;text-transform:uppercase;letter-spacing:.08em}.dashTools{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}.search{width:100%;border:1px solid var(--line);background:#1b1f19;color:var(--text);border-radius:10px;padding:11px 12px}.weightRow{display:flex;gap:8px;margin-top:10px}.weightRow input{flex:1;border:1px solid var(--line);background:#1b1f19;color:var(--text);border-radius:10px;padding:11px}.weightRow button{border:0;border-radius:10px;background:var(--accent);color:#161910;font-weight:850;padding:0 14px}.miniList{margin-top:12px;display:grid;gap:7px;max-height:190px;overflow:auto}.miniItem{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:10px;background:#1b1f19;font-size:12px}.miniItem span{color:#9ca197}.progressBar{height:7px;border-radius:99px;background:#292e26;overflow:hidden;margin-top:8px}.progressBar i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px}.history{margin-top:12px;display:grid;gap:8px;max-height:190px;overflow:auto}.historyItem{padding:10px;border:1px solid #2d332a;border-radius:10px;background:#191c17}.historyItem b{font-size:13px}.historyItem small{display:block;color:#8f958b;margin-top:3px}.muted{color:#8f958b;font-size:12px}.sectionLabel{margin:18px 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8f958b;font-weight:850}
+@media(max-width:800px){.dashboard{padding:0 14px}.dashGrid{grid-template-columns:1fr}.metricGrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<style>
+.mobileNav{display:none}.installPanel{display:none;position:fixed;inset:0;background:rgba(8,10,8,.78);z-index:30;align-items:flex-end}.installPanel.show{display:flex}.installSheet{width:100%;background:var(--cream);color:var(--ink);border-radius:22px 22px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -20px 60px rgba(0,0,0,.35)}.installSheet h3{font-size:25px;font-weight:400;margin:4px 0 12px}.installSteps{display:grid;gap:10px;margin:14px 0 18px}.installStep{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.45}.installStep b{display:grid;place-items:center;min-width:27px;height:27px;border-radius:50%;background:#171813;color:#c8ff5a}.closeInstall{width:100%;border:0;border-radius:11px;padding:13px;background:#171813;color:#f1eee5;font-weight:850}
+@media(max-width:430px){.mobileNav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:25;border:1px solid #3b4235;background:rgba(21,24,19,.96);backdrop-filter:blur(18px);border-radius:17px;padding:6px;box-shadow:0 12px 35px rgba(0,0,0,.35)}.mobileNav button{border:0;background:transparent;color:#aeb2a8;border-radius:12px;padding:9px 4px;font-size:10px;font-weight:800}.mobileNav button.active{background:#2a3024;color:var(--accent)}.footerBar{padding-bottom:95px}}
+</style>
+<header class="top">
+  <div class="eyebrow" id="yearLabel">2026</div>
+  <div class="titleRow"><div class="title" id="weekTitle">Sep 28 – Oct 4</div><div class="navBtns"><button class="todayBtn" id="todayBtn">Today</button><button class="round" id="prevWeek">‹</button><button class="round" id="nextWeek">›</button></div></div>
+  <div class="week" id="week"></div>
+</header>
+<section class="dashboard">
+  <div class="dashGrid">
+    <div class="dashCard">
+      <div class="dashTitle">Weekly progress</div>
+      <div class="dashBig" id="dashWeekLabel">This week</div>
+      <div class="metricGrid">
+        <div class="metric"><b id="mDays">0</b><span>planned days</span></div>
+        <div class="metric"><b id="mExercises">0</b><span>exercises</span></div>
+        <div class="metric"><b id="mSets">0</b><span>sets</span></div>
+        <div class="metric"><b id="mVolume">0</b><span>lb volume</span></div>
+      </div>
+      <div class="sectionLabel">Week completion</div>
+      <div class="progressBar"><i id="weekProgress"></i></div>
+      <div class="muted" id="weekProgressText">0 of 7 days planned</div>
+    </div>
+    <div class="dashCard">
+      <div class="dashTitle">Body weight</div>
+      <div class="dashBig" id="currentWeight">—</div>
+      <div class="muted">Track your body weight alongside training.</div>
+      <div class="weightRow"><input id="weightInput" inputmode="decimal" placeholder="e.g. 66.0 lb/kg"><button id="saveWeight">Save</button></div>
+      <div class="miniList" id="weightHistory"></div>
+    </div>
+  </div>
+  <div class="dashGrid" style="margin-top:12px">
+    <div class="dashCard">
+      <div class="dashTools"><div class="dashTitle">Exercise search</div><span class="muted">Search your logged history</span></div>
+      <input class="search" id="exerciseSearch" placeholder="Search squat, bench, curls...">
+      <div class="history" id="searchResults"></div>
+    </div>
+    <div class="dashCard">
+      <div class="dashTitle">Personal records</div>
+      <div class="muted">Highest logged weight for each exercise.</div>
+      <div class="miniList" id="prList"></div>
+    </div>
+  </div>
+</section>
+<main class="shell">
+<section class="card">
+  <div class="cardHead">
+    <div class="headTop"><div><div class="eyebrow">Selected day</div><div class="dateTitle" id="selectedDate">Thursday, October 1</div></div><div class="stat"><strong id="exerciseCount">0</strong><span> exercises</span></div></div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="mainGrid">
+    <section class="log"><div class="eyebrow">Session log</div><h2 style="font-weight:350;margin:5px 0 18px;font-size:25px;letter-spacing:-.03em">Exercises</h2><div id="entries"></div></section>
+    <aside class="form"><div class="eyebrow">New entry</div><h2>Add an exercise</h2>
+      <div class="field"><label>Exercise name</label><input class="input" id="exName" placeholder="e.g. Barbell squat"></div>
+      <div class="setsBox"><div class="setsHeader"><b>Sets</b><button class="addSet" id="addSet">＋ Add set</button></div><div class="newSet" style="margin-top:0;color:#777a72;font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-weight:800"><span>#</span><span>Weight (lb)</span><span>Reps</span><span></span></div><div id="newSets"></div></div>
+      <div class="field"><label>Comments / remarks</label><textarea class="textarea" id="exRemark" placeholder="How did the exercise feel? What should you change next time?"></textarea></div>
+      <button class="save" id="saveExercise">Log exercise</button><button class="cancel" id="clearForm">Clear</button>
+    </aside>
+  </div>
+</section>
+</main>
+<footer class="footerBar"><div class="tools"><button class="tool" id="installApp">＋ Add LiftLog to iPhone</button><button class="tool" id="clearDay">Clear selected day</button><button class="tool" id="exportData">Export backup</button><button class="tool" id="resetAll">Reset all data</button></div><div class="install"><b>Install it like an app:</b> after hosting this tracker, use Safari → Share → <b>Add to Home Screen</b>. LiftLog has an app-style title and icon and is designed to open full-screen. Your workout data stays on the device unless you export a backup.</div></footer>
+<nav class="mobileNav"><button class="active" data-nav="today">Today</button><button data-nav="history">History</button><button data-nav="progress">Progress</button><button data-nav="install">Install</button></nav>
+<div class="installPanel" id="installPanel"><div class="installSheet"><div class="eyebrow" style="color:#666a61">iPhone setup</div><h3>Put LiftLog on your Home Screen</h3><div class="installSteps"><div class="installStep"><b>1</b><span>Open the hosted LiftLog page in <strong>Safari</strong> on your iPhone.</span></div><div class="installStep"><b>2</b><span>Tap the <strong>Share</strong> button.</span></div><div class="installStep"><b>3</b><span>Choose <strong>Add to Home Screen</strong>.</span></div><div class="installStep"><b>4</b><span>Tap <strong>Add</strong>. LiftLog will appear as an icon and open like an app.</span></div></div><button class="closeInstall" id="closeInstall">Done</button></div></div>
+<div class="toast" id="toast">Saved</div>
+</div>
+<script>
+const cats=['Unplanned','Upper body','Lower body','Arms','Full body','Rest'];
+const storeKey='liftlog-v1';
+let data=JSON.parse(localStorage.getItem(storeKey)||'{}');
+let weekStart=new Date(2026,8,28); // demo starts on the week shown in the reference
+let selectedKey='2026-10-01';
+let draftSets=[{weight:'',reps:''}];
+function pad(n){return String(n).padStart(2,'0')}
+function key(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function fmt(d,opt={weekday:'long',month:'long',day:'numeric'}){return d.toLocaleDateString('en-US',opt)}
+function save(){localStorage.setItem(storeKey,JSON.stringify(data))}
+function dayObj(k){if(!data[k])data[k]={category:'Unplanned',exercises:[]};return data[k]}
+function renderWeek(){
+ const week=document.getElementById('week');week.innerHTML='';
+ const end=new Date(weekStart);end.setDate(end.getDate()+6);
+ document.getElementById('yearLabel').textContent=weekStart.getFullYear();
+ document.getElementById('weekTitle').textContent=`${weekStart.toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${end.toLocaleDateString('en-US',{month:'short',day:'numeric'})}`;
+ for(let i=0;i<7;i++){let d=new Date(weekStart);d.setDate(d.getDate()+i);let k=key(d),o=dayObj(k),b=document.createElement('button');b.className='dayCard'+(k===selectedKey?' active':'');b.innerHTML=`<span class="dow">${d.toLocaleDateString('en-US',{weekday:'short'}).toUpperCase()}</span><span class="dateNum">${d.getDate()}</span><span><i class="dot"></i> <span class="planned">${o.category==='Unplanned'?'Not planned':o.category}</span></span>`;b.onclick=()=>{selectedKey=k;renderAll()};week.appendChild(b)}
+}
+function renderChips(){const box=document.getElementById('chips'),o=dayObj(selectedKey);box.innerHTML='';cats.forEach(c=>{let b=document.createElement('button');b.className='chip '+(c==='Rest'?'rest ':'')+(o.category===c?'selected':'');b.textContent=c;b.onclick=()=>{o.category=c;save();renderAll();toast(`${c} noted for ${fmt(new Date(selectedKey+'T12:00:00'),{weekday:'short',month:'short',day:'numeric'})}`)};box.appendChild(b)})}
+function renderEntries(){const box=document.getElementById('entries'),o=dayObj(selectedKey);document.getElementById('exerciseCount').textContent=o.exercises.length;box.innerHTML='';if(!o.exercises.length){box.innerHTML=`<div class="empty"><strong>No exercises logged yet.</strong>Choose the day type above, then add each exercise with as many sets as you completed.</div>`;return}o.exercises.forEach((ex,idx)=>{const el=document.createElement('div');el.className='entry';el.innerHTML=`<div class="entryTop"><div><div class="exerciseTitle">${esc(ex.name)}</div><div class="meta">${ex.sets.length} set${ex.sets.length===1?'':'s'}${ex.sets.length?` · ${ex.sets.reduce((s,x)=>s+(Number(x.weight)||0)*(Number(x.reps)||0),0).toLocaleString()} lb volume`:''}</div></div><button class="deleteEx" title="Delete exercise">×</button></div><div class="setTable"><div class="setRow head"><span>Set</span><span>Weight</span><span>Reps</span><span>Notes</span><span></span></div>${ex.sets.map((s,j)=>`<div class="setRow"><span class="setNo">${j+1}</span><span class="setVal">${s.weight?esc(s.weight)+' lb':'—'}</span><span class="setVal">${s.reps?esc(s.reps):'—'}</span><span class="setVal" style="color:#9ca198">${s.note?esc(s.note):'—'}</span><button class="deleteSet" data-e="${idx}" data-s="${j}">×</button></div>`).join('')}</div>${ex.remark?`<div class="remark"><b>Remark:</b> ${esc(ex.remark)}</div>`:''}`;el.querySelector('.deleteEx').onclick=()=>{o.exercises.splice(idx,1);save();renderEntries();renderWeek()};el.querySelectorAll('.deleteSet').forEach(btn=>btn.onclick=()=>{o.exercises[+btn.dataset.e].sets.splice(+btn.dataset.s,1);save();renderEntries()});box.appendChild(el)})}
+function renderForm(){const ns=document.getElementById('newSets');ns.innerHTML='';draftSets.forEach((s,i)=>{let row=document.createElement('div');row.className='newSet';row.innerHTML=`<span>${i+1}</span><input class="mini" inputmode="decimal" placeholder="45" value="${esc(s.weight)}"><input class="mini" inputmode="numeric" placeholder="15" value="${esc(s.reps)}"><button class="deleteSet" style="color:#555" ${draftSets.length===1?'disabled':''}>×</button>`;let inputs=row.querySelectorAll('input');inputs[0].oninput=e=>s.weight=e.target.value;inputs[1].oninput=e=>s.reps=e.target.value;row.querySelector('button').onclick=()=>{if(draftSets.length>1){draftSets.splice(i,1);renderForm()}};ns.appendChild(row)})}
+function resetForm(){document.getElementById('exName').value='';document.getElementById('exRemark').value='';draftSets=[{weight:'',reps:''}];renderForm()}
+document.getElementById('addSet').onclick=()=>{draftSets.push({weight:'',reps:''});renderForm()};
+document.getElementById('saveExercise').onclick=()=>{let name=document.getElementById('exName').value.trim();if(!name){toast('Add an exercise name');return}let clean=draftSets.filter(s=>s.weight||s.reps);if(!clean.length)clean=[{weight:'',reps:'',note:''}];dayObj(selectedKey).exercises.push({name,sets:clean.map(s=>({...s,note:''})),remark:document.getElementById('exRemark').value.trim()});save();resetForm();renderAll();toast('Exercise logged')};
+document.getElementById('clearForm').onclick=resetForm;
+document.getElementById('prevWeek').onclick=()=>{weekStart.setDate(weekStart.getDate()-7);renderAll()};document.getElementById('nextWeek').onclick=()=>{weekStart.setDate(weekStart.getDate()+7);renderAll()};document.getElementById('todayBtn').onclick=()=>{let d=new Date();let day=d.getDay();weekStart=new Date(d);weekStart.setHours(0,0,0,0);weekStart.setDate(d.getDate()-(day===0?6:day-1));selectedKey=key(d);renderAll()};
+document.getElementById('clearDay').onclick=()=>{if(confirm('Clear all exercises for this day?')){dayObj(selectedKey).exercises=[];save();renderAll();toast('Day cleared')}};
+document.getElementById('resetAll').onclick=()=>{if(confirm('Reset all workout data on this device?')){data={};save();renderAll();toast('All data reset')}};
+document.getElementById('exportData').onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='liftlog-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exported')};
+const installPanel=document.getElementById('installPanel');document.getElementById('installApp').onclick=()=>installPanel.classList.add('show');document.getElementById('closeInstall').onclick=()=>installPanel.classList.remove('show');installPanel.addEventListener('click',e=>{if(e.target===installPanel)installPanel.classList.remove('show')});
+document.querySelectorAll('.mobileNav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mobileNav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');let n=b.dataset.nav;if(n==='today'){document.getElementById('week').scrollIntoView({behavior:'smooth',block:'start'})}else if(n==='history'){document.getElementById('searchResults').scrollIntoView({behavior:'smooth',block:'center'})}else if(n==='progress'){document.querySelector('.dashboard').scrollIntoView({behavior:'smooth',block:'start'})}else{installPanel.classList.add('show')}});
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+let toastTimer;function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+function renderAll(){renderWeek();let d=new Date(selectedKey+'T12:00:00');document.getElementById('selectedDate').textContent=fmt(d);renderChips();renderEntries()}
+// Seed only the visual example if the device has no saved data.
+if(!Object.keys(data).length){data['2026-10-01']={category:'Lower body',exercises:[{name:'Example: Barbell squat',sets:[{weight:'45',reps:'15',note:''},{weight:'35',reps:'20',note:''}],remark:'Example only — replace with your actual session.'}]};save()}
+renderForm();renderAll();
+</script>
+<script>
+(function(){
+ const wk='liftlog-meta-v1',meta=JSON.parse(localStorage.getItem(wk)||'{"weights":[]}');
+ function saveMeta(){localStorage.setItem(wk,JSON.stringify(meta))}
+ function refreshDash(){
+   const dates=[];for(let i=0;i<7;i++){let d=new Date(weekStart);d.setDate(d.getDate()+i);dates.push(key(d))}
+   let planned=0,exercises=0,sets=0,volume=0;
+   dates.forEach(k=>{let o=data[k];if(o&&o.category&&o.category!=='Unplanned')planned++;(o?.exercises||[]).forEach(ex=>{exercises++;(ex.sets||[]).forEach(s=>{sets++;volume+=(Number(s.weight)||0)*(Number(s.reps)||0)})})});
+   document.getElementById('dashWeekLabel').textContent=weekStart.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' week';
+   document.getElementById('mDays').textContent=planned;document.getElementById('mExercises').textContent=exercises;document.getElementById('mSets').textContent=sets;document.getElementById('mVolume').textContent=Math.round(volume).toLocaleString();
+   document.getElementById('weekProgress').style.width=Math.round(planned/7*100)+'%';document.getElementById('weekProgressText').textContent=planned+' of 7 days planned';
+   const prs={};Object.values(data).forEach(o=>(o?.exercises||[]).forEach(ex=>(ex.sets||[]).forEach(s=>{let w=Number(s.weight)||0;if(w&&(!prs[ex.name]||w>prs[ex.name]))prs[ex.name]=w})));
+   const pr=document.getElementById('prList');pr.innerHTML=Object.keys(prs).sort().map(n=>'<div class="miniItem"><b>'+esc(n)+'</b><span>'+prs[n]+' lb</span></div>').join('')||'<div class="muted">Log exercises to see your PRs.</div>';
+   renderWeights();renderSearch();
+ }
+ function renderWeights(){const box=document.getElementById('weightHistory'),arr=meta.weights||[];document.getElementById('currentWeight').textContent=arr.length?arr[arr.length-1].value+' '+arr[arr.length-1].unit:'—';box.innerHTML=arr.slice(-5).reverse().map(x=>'<div class="miniItem"><b>'+x.value+' '+x.unit+'</b><span>'+x.date+'</span></div>').join('')}
+ function renderSearch(){const q=(document.getElementById('exerciseSearch').value||'').toLowerCase().trim(),box=document.getElementById('searchResults');let rows=[];Object.entries(data).forEach(([k,o])=>(o?.exercises||[]).forEach(ex=>{if(!q||ex.name.toLowerCase().includes(q)){let total=(ex.sets||[]).reduce((a,s)=>a+(Number(s.weight)||0)*(Number(s.reps)||0),0);rows.push({k,name:ex.name,sets:ex.sets?.length||0,total})}}));rows.sort((a,b)=>b.k.localeCompare(a.k));box.innerHTML=rows.slice(0,30).map(x=>'<div class="historyItem"><b>'+esc(x.name)+'</b><small>'+fmt(new Date(x.k+'T12:00:00'),{weekday:'short',month:'short',day:'numeric',year:'numeric'})+' · '+x.sets+' sets · '+Math.round(x.total).toLocaleString()+' lb volume</small></div>').join('')||'<div class="muted">No matching exercises yet.</div>'}
+ document.getElementById('saveWeight').onclick=function(){let v=document.getElementById('weightInput').value.trim();if(!v)return;let unit=prompt('Unit? Enter lb or kg','lb')||'lb';meta.weights=meta.weights||[];meta.weights.push({value:v,unit:unit.toLowerCase()==='kg'?'kg':'lb',date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'})});saveMeta();document.getElementById('weightInput').value='';refreshDash();toast('Weight saved')};
+ document.getElementById('exerciseSearch').oninput=renderSearch;
+ const originalRenderAll=window.renderAll;window.renderAll=function(){originalRenderAll();refreshDash()};
+ refreshDash();
+})();
+</script>
+</body>
+</html>
